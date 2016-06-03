@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="my-icons.html">
+<link rel="import" href="icons.html">
 
 <dom-module id="my-app">
 
@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       :host {
         display: block;
-        --app-primary-color: #4285f4;
+        --app-primary-color: #4233aa;
         --app-secondary-color: black;
       }
 
@@ -38,11 +38,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: #fff;
       }
       app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
+        --paper-icon-button-ink-color: red;
       }
 
       .drawer-list {
         margin: 0 20px;
+
       }
       .drawer-list a {
         display: block;
@@ -75,9 +76,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="my-view1" href="/view1">About Us</a>
+          <a name="view2" href="/view2">Docs</a>
+          <a name="view3" href="/view3">API</a>
+          <a name="view4" href="/view4">Contact Us</a>
         </iron-selector>
       </app-drawer>
 
@@ -87,7 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div title>My App</div>
+            <div title>Playing with Polymer</div>
           </app-toolbar>
         </app-header>
 
@@ -95,6 +97,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <my-view1 name="view1"></my-view1>
           <my-view2 name="view2"></my-view2>
           <my-view3 name="view3"></my-view3>
+          <my-view4 name="view4"></my-view4>
         </iron-pages>
 
       </app-header-layout>
@@ -105,23 +108,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
 
-    Polymer({
+   Polymer({
 
       is: 'my-app',
 
-      properties: {
+     properties: {
 
         page: {
           type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
-        },
-
+        }
       },
 
       observers: [
-        '_routePageChanged(routeData.page)'
-      ],
+          '_routePageChanged(routeData.page)'
+        ],
 
       _routePageChanged: function(page) {
         this.page = page || 'view1';
@@ -130,10 +132,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _pageChanged: function(page) {
         // load page import on demand.
         this.importHref(
-          this.resolveUrl('my-' + page + '.html'), null, null, true);
-      }
+        //  this.resolveUrl('my-' + page + '.html'), null, null, true);
+          this.resolveUrl( page + '.html'), null, null, true);
+     }
 
-    });
+   });
+
 
   </script>
 
